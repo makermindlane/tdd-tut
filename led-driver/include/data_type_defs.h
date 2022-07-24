@@ -2,7 +2,8 @@
 
 #include <stdint.h>
 
-// Why create these typedefs? To ease code writing.
+// Why create these typedefs? To ease code writing. Annnnnd I'm a Rust fan because that
+// language is super challenging (>.<)
 
 typedef int8_t i8;
 typedef int16_t i16;
