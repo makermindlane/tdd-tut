@@ -21,12 +21,6 @@ TEST(LedDriver, TurnOnLedOne) {
     LONGS_EQUAL(1, virtual_leds);
 }
 
-TEST(LedDriver, TurnOffLedOne) {
-    LedDriver_turn_on(1);
-    LedDriver_turn_off(1);
-    LONGS_EQUAL(0, virtual_leds);
-}
-
 TEST(LedDriver, TurnOnMultipleLeds) {
     LedDriver_turn_on(8);
     LedDriver_turn_on(9);
