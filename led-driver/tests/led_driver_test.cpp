@@ -34,13 +34,12 @@ TEST(LedDriver, TurnOnMultipleLeds) {
 }
 
 TEST(LedDriver, AllOn) {
-	LedDriver_turn_on_all();
-	LONGS_EQUAL(0xffff, virtual_leds);
+    LedDriver_turn_on_all();
+    LONGS_EQUAL(0xffff, virtual_leds);
 }
 
-// TEST(LedDriver, TurnOffAnyLed) {
-// 	LedDriver_turn_on(9);
-// 	LedDriver_turn_on(8);
-// 	LedDriver_turn_off(8);
-// 	LONGS_EQUAL(0x100, virtual_leds);
-// }
+TEST(LedDriver, TurnOffAnyLed) {
+    LedDriver_turn_on_all();
+    LedDriver_turn_off(8);
+    LONGS_EQUAL(0xff7f, virtual_leds);
+}
