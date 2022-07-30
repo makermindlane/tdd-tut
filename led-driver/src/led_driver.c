@@ -1,5 +1,7 @@
 #include "led_driver.h"
 
+enum { ALL_LEDS_ON = ~0, ALL_LEDS_OFF = ~ALL_LEDS_ON };
+
 /****************************************************************************************
  * PRIVATE FUNCTION PROTOTYPES
  ***************************************************************************************/
@@ -16,15 +18,13 @@ static u16* leds_address;
 
 void LedDriver_create(u16* address) {
     leds_address = address;
-    *leds_address = 0;
+    *leds_address = ALL_LEDS_OFF;
 }
 void LedDriver_destroy() {}
 
 void LedDriver_turn_on(i32 led_number) { *leds_address |= num_to_bit(led_number); }
 
-void LedDriver_turn_on_all() {
-	*leds_address = 0xffff;
-}
+void LedDriver_turn_on_all() { *leds_address = ALL_LEDS_ON; }
 
 void LedDriver_turn_off(i32 led_number) { *leds_address &= num_to_bit(led_number); }
 
