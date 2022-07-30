@@ -26,7 +26,7 @@ void LedDriver_turn_on(i32 led_number) { *leds_address |= num_to_bit(led_number)
 
 void LedDriver_turn_on_all() { *leds_address = ALL_LEDS_ON; }
 
-void LedDriver_turn_off(i32 led_number) { *leds_address &= num_to_bit(led_number); }
+void LedDriver_turn_off(i32 led_number) { *leds_address &= ~num_to_bit(led_number); }
 
 /****************************************************************************************
  * PRIVATE FUNCTION DEFINITIONS
