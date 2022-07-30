@@ -11,6 +11,7 @@ static u16 num_to_bit(i32 num);
  * GLOBAL PRIVATE VARIABLES
  ***************************************************************************************/
 static u16* leds_address;
+static u16 leds_image;
 
 /****************************************************************************************
  * PUBLIC FUNCTION DEFINITIONS
@@ -18,15 +19,25 @@ static u16* leds_address;
 
 void LedDriver_create(u16* address) {
     leds_address = address;
-    *leds_address = ALL_LEDS_OFF;
+    leds_image = ALL_LEDS_OFF;
+    *leds_address = leds_image;
 }
 void LedDriver_destroy() {}
 
-void LedDriver_turn_on(i32 led_number) { *leds_address |= num_to_bit(led_number); }
+void LedDriver_turn_on(i32 led_number) {
+    leds_image |= num_to_bit(led_number);
+    *leds_address = leds_image;
+}
 
-void LedDriver_turn_on_all() { *leds_address = ALL_LEDS_ON; }
+void LedDriver_turn_on_all() {
+    leds_image = ALL_LEDS_ON;
+    *leds_address = leds_image;
+}
 
-void LedDriver_turn_off(i32 led_number) { *leds_address &= ~num_to_bit(led_number); }
+void LedDriver_turn_off(i32 led_number) {
+    leds_image &= ~num_to_bit(led_number);
+    *leds_address = leds_image;
+}
 
 /****************************************************************************************
  * PRIVATE FUNCTION DEFINITIONS
