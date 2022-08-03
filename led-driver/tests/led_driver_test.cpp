@@ -56,3 +56,11 @@ TEST(LedDriver, UpperAndLowerBounds) {
     LONGS_EQUAL(0x8001, virtual_leds);
 }
 
+TEST(LedDriver, OutOfBoundsTurnOnDoesNoHarm) {
+    LedDriver_turn_on(-1);
+    LedDriver_turn_on(0);
+    LedDriver_turn_on(17);
+    LedDriver_turn_on(3141);
+
+    LONGS_EQUAL(0, virtual_leds);
+}
