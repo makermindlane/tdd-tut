@@ -49,3 +49,10 @@ TEST(LedDriver, LedMemoryIsNotReadable) {
     LedDriver_turn_on(8);
     LONGS_EQUAL(0x80, virtual_leds);
 }
+
+TEST(LedDriver, UpperAndLowerBounds) {
+    LedDriver_turn_on(1);
+    LedDriver_turn_on(16);
+    LONGS_EQUAL(0x8001, virtual_leds);
+}
+
