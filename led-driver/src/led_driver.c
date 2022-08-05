@@ -1,5 +1,7 @@
 #include "led_driver.h"
 
+#include "runtime_error.h"
+
 enum { ALL_LEDS_ON = ~0, ALL_LEDS_OFF = ~ALL_LEDS_ON };
 
 /****************************************************************************************
@@ -26,7 +28,10 @@ void LedDriver_create(u16* address) {
 void LedDriver_destroy() {}
 
 void LedDriver_turn_on(i32 led_number) {
-    if (led_number <= 0 || led_number > 16) return;
+    if (led_number <= 0 || led_number > 16) {
+        RUNTIME_ERROR("LED Driver: out-of-bounds LED", led_number);
+        return;
+    }
 
     leds_image |= num_to_bit(led_number);
     update_hardware();
@@ -38,7 +43,10 @@ void LedDriver_turn_on_all() {
 }
 
 void LedDriver_turn_off(i32 led_number) {
-    if (led_number <= 0 || led_number > 16) return;
+    if (led_number <= 0 || led_number > 16) {
+        RUNTIME_ERROR("LED Driver: out-of-bounds LED", led_number);
+        return;
+    }
 
     leds_image &= ~num_to_bit(led_number);
     update_hardware();
