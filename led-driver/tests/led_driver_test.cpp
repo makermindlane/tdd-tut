@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "led_driver.h"
+#include "runtime_error_stub.h"
 }
 
 TEST_GROUP(LedDriver) {
@@ -66,12 +67,18 @@ TEST(LedDriver, OutOfBoundsTurnOnDoesNoHarm) {
 }
 
 TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm) {
-	LedDriver_turn_on_all();
-	
+    LedDriver_turn_on_all();
+
     LedDriver_turn_off(-1);
     LedDriver_turn_off(0);
     LedDriver_turn_off(17);
     LedDriver_turn_off(3141);
 
     LONGS_EQUAL(0xffff, virtual_leds);
+}
+
+TEST(LedDriver, OutOfBoundsProducesRuntimeError) {
+    LedDriver_turn_on(-1);
+    STRCMP_EQUAL("LED Driver: out-of-bounds LED", RuntimeErrorStub_get_last_error());
+    LONGS_EQUAL(-1, RuntimeErrorStub_get_last_parameter());
 }
