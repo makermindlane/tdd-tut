@@ -31,9 +31,10 @@ TEST_SRC_DIRS = \
 	mocks
 	
 INCLUDE_DIRS =\
-  $(CPPUTEST_HOME)/include/\
-  include\
-  mocks
+	$(CPPUTEST_HOME)/include/\
+	include\
+	include/util\
+	mocks
   
 ifeq ($(CPPUTEST_HOME),)
 $(info CPPUTEST_HOME not set! See README.txt)
