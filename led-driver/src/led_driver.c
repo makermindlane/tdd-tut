@@ -59,6 +59,9 @@ void LedDriver_turn_off(i32 led_number) {
 }
 
 bool LedDriver_is_on(i32 led_number) {
+	if (is_led_out_of_bounds(led_number)) {
+		return false;
+	}
 	return leds_image & (num_to_bit(led_number));
 }
 
