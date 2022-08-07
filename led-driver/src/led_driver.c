@@ -58,6 +58,10 @@ void LedDriver_turn_off(i32 led_number) {
     update_hardware();
 }
 
+bool LedDriver_is_on(i32 led_number) {
+	return leds_image & (num_to_bit(led_number));
+}
+
 //=======================================================================================
 // PRIVATE FUNCTION DEFINITIONS
 //=======================================================================================
