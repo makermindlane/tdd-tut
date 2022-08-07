@@ -45,6 +45,14 @@ TEST(LedDriver, TurnOffAnyLed) {
     LONGS_EQUAL(0xff7f, virtual_leds);
 }
 
+TEST(LedDriver, TurnOffMultipleLeds) {
+    LedDriver_turn_on_all();
+    LedDriver_turn_off(9);
+    LedDriver_turn_off(8);
+
+    LONGS_EQUAL((~0x180) & 0xffff, virtual_leds);
+}
+
 TEST(LedDriver, LedMemoryIsNotReadable) {
     virtual_leds = 0xffff;
     LedDriver_turn_on(8);
