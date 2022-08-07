@@ -94,3 +94,8 @@ TEST(LedDriver, IsOn) {
     LedDriver_turn_on(11);
     CHECK_TRUE(LedDriver_is_on(11));
 }
+
+TEST(LedDriver, OutOfBoundsLedsAreAlwaysOff) {
+	CHECK_FALSE(LedDriver_is_on(0));
+	CHECK_FALSE(LedDriver_is_on(17));
+}
