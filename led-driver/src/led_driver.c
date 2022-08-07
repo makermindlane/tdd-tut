@@ -48,6 +48,11 @@ void LedDriver_turn_on_all() {
     update_hardware();
 }
 
+void LedDriver_turn_off_all() {
+    leds_image = ALL_LEDS_OFF;
+    update_hardware();
+}
+
 void LedDriver_turn_off(i32 led_number) {
     if (is_led_out_of_bounds(led_number)) {
         RUNTIME_ERROR("LED Driver: out-of-bounds LED", led_number);
@@ -59,15 +64,13 @@ void LedDriver_turn_off(i32 led_number) {
 }
 
 bool LedDriver_is_on(i32 led_number) {
-	if (is_led_out_of_bounds(led_number)) {
-		return false;
-	}
-	return leds_image & (num_to_bit(led_number));
+    if (is_led_out_of_bounds(led_number)) {
+        return false;
+    }
+    return leds_image & (num_to_bit(led_number));
 }
 
-bool LedDriver_is_off(i32 led_number) {
-	return !LedDriver_is_on(led_number);
-}
+bool LedDriver_is_off(i32 led_number) { return !LedDriver_is_on(led_number); }
 
 //=======================================================================================
 // PRIVATE FUNCTION DEFINITIONS
