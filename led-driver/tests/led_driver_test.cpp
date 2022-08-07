@@ -39,6 +39,12 @@ TEST(LedDriver, AllOn) {
     LONGS_EQUAL(0xffff, virtual_leds);
 }
 
+TEST(LedDriver, AllOff) {
+    LedDriver_turn_on_all();
+    LedDriver_turn_off_all();
+    LONGS_EQUAL(0, virtual_leds);
+}
+
 TEST(LedDriver, TurnOffAnyLed) {
     LedDriver_turn_on_all();
     LedDriver_turn_off(8);
