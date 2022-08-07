@@ -65,6 +65,10 @@ bool LedDriver_is_on(i32 led_number) {
 	return leds_image & (num_to_bit(led_number));
 }
 
+bool LedDriver_is_off(i32 led_number) {
+	return !LedDriver_is_on(led_number);
+}
+
 //=======================================================================================
 // PRIVATE FUNCTION DEFINITIONS
 //=======================================================================================
