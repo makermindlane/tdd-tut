@@ -10,7 +10,8 @@ typedef enum Day {
     WEDNESDAY,
     THURSDAY,
     FRIDAY,
-    SATURDAY
+    SATURDAY,
+	EVERYDAY
 } Day;
 
 typedef struct Time {
