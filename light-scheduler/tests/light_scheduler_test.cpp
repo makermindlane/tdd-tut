@@ -25,22 +25,32 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization) {
 }
 
 TEST(LightScheduler, NoScheduleNothingHappens) {
-	FakeTimeService_set_day(MONDAY);
-	FakeTimeService_set_minute(100);
+    FakeTimeService_set_day(MONDAY);
+    FakeTimeService_set_minute(100);
 
-	LightScheduler_wakeup();
+    LightScheduler_wakeup();
 
-	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_id());
-	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_state());
+    LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_id());
+    LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_state());
 }
 
 TEST(LightScheduler, ScheduleOnEverydayNotTimeYet) {
-	LightScheduler_schedule_turn_on(3, EVERYDAY, 1200);
-	FakeTimeService_set_day(MONDAY);
-	FakeTimeService_set_minute(1199);
+    LightScheduler_schedule_turn_on(3, EVERYDAY, 1200);
+    FakeTimeService_set_day(MONDAY);
+    FakeTimeService_set_minute(1199);
 
-	LightScheduler_wakeup();
+    LightScheduler_wakeup();
 
-	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_id());
-	LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_get_last_state());
+    LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_get_last_id());
+    LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_get_last_state());
+}
+
+TEST(LightScheduler, ScheduleOnEverydayItsTime) {
+    LightScheduler_schedule_turn_on(3, EVERYDAY, 1200);
+    FakeTimeService_set_day(MONDAY);
+    FakeTimeService_set_minute(1200);
+
+    LightScheduler_wakeup();
+    LONGS_EQUAL(3, LightControllerSpy_get_last_id());
+    LONGS_EQUAL(LIGHT_ON, LightControllerSpy_get_last_state());
 }
