@@ -1,18 +1,7 @@
 #pragma once
 
 #include "data_type_defs.h"
-
-typedef enum Day {
-    DAY_UNKNOWN = -1,
-    SUNDAY,
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-	EVERYDAY
-} Day;
+#include "light_scheduler.h"
 
 typedef struct Time {
     i32 minute_of_day;
